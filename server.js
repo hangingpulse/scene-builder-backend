@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const connectDB = require("./dbinit");
 const users = require("./api/users");
+const scenes = require("./api/scenes");
 const errorHandler = require("./middleware/error");
 
 const app = express();
@@ -15,6 +16,7 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.use("/scenes", scenes);
 app.use("/users", users);
 app.use(errorHandler);
 

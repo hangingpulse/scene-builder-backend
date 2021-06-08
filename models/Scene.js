@@ -8,6 +8,16 @@ const SceneSchema = new Schema({
         required: [true, "Please add a title"],
         maxlength: [50, "Only max 50 chars are allowed for the name"],
     },
+    meta: {
+        creator: String,
+        public: {
+            type: Boolean,
+            required: true,
+        },
+    },
+    rawtext: {
+        type: String,
+    },
     //  names of itmes must be exactly the same as fields in MngoDB
     general: {
         header: String,
@@ -25,13 +35,16 @@ const SceneSchema = new Schema({
     sceneItems: [
         {
             id: String,
-            characterId: String,
-            type: String,
+            character: String,
+            itemType: String,
             text: String,
-            duration: Number,
+            length: Number,
             delay: Number,
         },
     ],
 });
 
 module.exports = mongoose.model("Scene", SceneSchema);
+
+// make a file and upload it
+// public folder
