@@ -6,7 +6,7 @@ const { ObjectId } = mongoose.Types;
 
 const getScenes = async (req, res, next) => {
     try {
-        const scenes = await Scene.find({ meta: { public: { $eq: true } } });
+        const scenes = await Scene.find({ "meta.public": true });
         res.json({
             success: true,
             msg: "show all scenes",
