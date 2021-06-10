@@ -4,13 +4,13 @@ const {
     getScene,
     updateScene,
     createScene,
-    deleteAllScenes,
+    deleteScene,
 } = require("../controllers/scenes");
 
 const api = express.Router();
 
-api.route("/").get(getScenes).post(createScene).delete(deleteAllScenes);
+api.route("/").get(getScenes).post(createScene);
 
-api.route("/:sceneid").get(getScene).put(updateScene);
+api.route("/:sceneid").get(getScene).put(updateScene).delete(deleteScene);
 
 module.exports = api;

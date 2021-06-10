@@ -6,7 +6,7 @@ const { ObjectId } = mongoose.Types;
 
 const getScenes = async (req, res, next) => {
     try {
-        const scenes = await Scene.find();
+        const scenes = await Scene.find({ meta: { public: { $eq: true } } });
         res.json({
             success: true,
             msg: "show all scenes",
@@ -98,11 +98,10 @@ const updateScene = async (req, res, next) => {
     }
 };
 
-const deleteAllScenes = async (req, res, next) => {
+const deleteScene = async (req, res, next) => {
     try {
-        const scenes = await Scene.deleteMany({
-            id: { $ne: "60bf345e1e6f1c0fee1c2736" },
-        });
+        const { sceneid } = req.params;
+        const scenes = await Scene.deleteById(sceneid);
         res.json({
             success: true,
             msg: "all scenes wothout description deleted",
@@ -120,5 +119,5 @@ module.exports = {
     getSceneByUserId,
     createScene,
     updateScene,
-    deleteAllScenes,
+    deleteScene,
 };
