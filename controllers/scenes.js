@@ -23,7 +23,7 @@ const getScene = async (req, res, next) => {
         const scene = await Scene.findById(sceneid);
         res.json({
             success: true,
-            msg: `show scene with id ${id}`,
+            msg: `show scene with id ${sceneid}`,
             data: scene,
         });
     } catch (err) {
@@ -50,13 +50,13 @@ const createScene = async (req, res, next) => {
     try {
         const { title, meta, general, characters, sceneItems } = req.body;
 
-        const scene = await Scene.create(
+        const scene = await Scene.create({
             title,
             meta,
             general,
             characters,
-            sceneItems
-        );
+            sceneItems,
+        });
 
         res.json({
             success: true,
@@ -98,6 +98,21 @@ const updateScene = async (req, res, next) => {
     }
 };
 
+const deleteAllScenes = async (req, res, next) => {
+    try {
+        const scenes = await Scene.deleteMany({
+            id: { $ne: "60bf345e1e6f1c0fee1c2736" },
+        });
+        res.json({
+            success: true,
+            msg: "all scenes wothout description deleted",
+            data: scenes,
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     getScenes,
     getScene,
@@ -105,4 +120,5 @@ module.exports = {
     getSceneByUserId,
     createScene,
     updateScene,
+    deleteAllScenes,
 };

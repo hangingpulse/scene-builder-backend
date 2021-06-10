@@ -8,15 +8,13 @@ const SceneSchema = new Schema({
         required: [true, "Please add a title"],
         maxlength: [50, "Only max 50 chars are allowed for the name"],
     },
+    openAIuse: Number,
     meta: {
         creator: String,
-        public: {
-            type: Boolean,
-            required: true,
-        },
-    },
-    rawtext: {
-        type: String,
+        description: String,
+        tags: [String],
+        rawtext: String,
+        public: Boolean,
     },
     //  names of itmes must be exactly the same as fields in MngoDB
     general: {
@@ -25,6 +23,7 @@ const SceneSchema = new Schema({
     },
     characters: [
         {
+            _id: false,
             id: String,
             name: String,
             colorIndex: Number,
@@ -34,10 +33,12 @@ const SceneSchema = new Schema({
     ],
     sceneItems: [
         {
+            _id: false,
             id: String,
             character: String,
             itemType: String,
             text: String,
+            display: Boolean,
             length: Number,
             delay: Number,
         },
